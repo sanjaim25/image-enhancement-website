@@ -105,6 +105,10 @@ def too_large(e):
 
 @app.route('/')
 def landing():
+    # Serve the root index.html directly (standalone, no Jinja)
+    root_index = os.path.abspath(os.path.join(os.path.dirname(__file__), 'index.html'))
+    if os.path.exists(root_index):
+        return send_from_directory(os.path.dirname(root_index), 'index.html')
     return render_template('landing.html')
 
 
